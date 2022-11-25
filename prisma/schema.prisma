@@ -27,15 +27,29 @@ model Grow {
   startDate String?
   endDate  String?
   strain   String?
-  comments Comment[]
+  entries Entry[]
   author   User      @relation(fields: [authorId], references: [id])
   authorId String    @db.ObjectId
 }
 
-//temp model comment
-model Comment {
+//temp model Entry
+model Entry {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   grow    Grow   @relation(fields: [growId], references: [id])
   growId  String @db.ObjectId
-  comment String
+  date    String
+  phRes   String?
+  phSub   String?
+  phRun   String?
+  ecRes   String?
+  ecSub   String?
+  ecRun   String?
+  roomTemp  String?
+  substrateTemp String?
+  humidity  String?
+  vpd     String?
+  dli     String?
+  par     String?
+  hoursOfLight  String?
+  note String
 }
