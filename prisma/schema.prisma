@@ -23,9 +23,10 @@ model Grow {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   slug     String    @unique
   title    String
-  body     String
+  description String?
   startDate String?
   endDate  String?
+  strain   String?
   comments Comment[]
   author   User      @relation(fields: [authorId], references: [id])
   authorId String    @db.ObjectId
