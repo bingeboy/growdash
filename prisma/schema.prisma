@@ -15,15 +15,17 @@ model User {
   id    String  @id @default(auto()) @map("_id") @db.ObjectId
   email String  @unique
   name  String?
-  posts Post[]
+  grows Grow[]
 }
 
-// temp post model
-model Post {
+// temp grow model
+model Grow {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   slug     String    @unique
   title    String
   body     String
+  startDate String?
+  endDate  String?
   comments Comment[]
   author   User      @relation(fields: [authorId], references: [id])
   authorId String    @db.ObjectId
@@ -32,7 +34,7 @@ model Post {
 //temp model comment
 model Comment {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  post    Post   @relation(fields: [postId], references: [id])
-  postId  String @db.ObjectId
+  grow    Grow   @relation(fields: [growId], references: [id])
+  growId  String @db.ObjectId
   comment String
 }

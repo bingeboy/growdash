@@ -12,9 +12,9 @@ async function main() {
         data: {
           name: 'Rich',
           email: 'hello@prisma.com',
-          posts: {
+          grows: {
             create: {
-              title: 'My first post',
+              title: 'My first grow',
               body: 'Lots of really interesting stuff',
               slug: 'my-first-post',
             },
