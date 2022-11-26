@@ -23,9 +23,11 @@ model Grow {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   slug     String    @unique
   title    String
+  createdAt  DateTime @default(now())
   description String?
-  startDate String?
-  endDate  String?
+  expectedDays Int?
+  startDate DateTime?
+  endDate  DateTime?
   strain   String?
   entries Entry[]
   author   User      @relation(fields: [authorId], references: [id])
@@ -37,7 +39,7 @@ model Entry {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   grow    Grow   @relation(fields: [growId], references: [id])
   growId  String @db.ObjectId
-  date    String
+  createdAt  DateTime @default(now())
   phRes   String?
   phSub   String?
   phRun   String?
@@ -51,5 +53,5 @@ model Entry {
   dli     String?
   par     String?
   hoursOfLight  String?
-  note String
+  note    String
 }
