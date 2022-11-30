@@ -11,27 +11,30 @@ datasource db {
 }
 
 // User 
+// TODO Support cascade deletes for user accounts
 model User {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
   email String  @unique
-  name  String?
+  username  String @unique
+  passwordHash String 
   grows Grow[]
 }
 
 // temp grow model
 model Grow {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  slug     String    @unique
   title    String
   createdAt  DateTime @default(now())
   description String?
   expectedDays Int?
-  startDate DateTime?
-  endDate  DateTime?
-  strain   String?
-  entries Entry[]
-  author   User      @relation(fields: [authorId], references: [id])
-  authorId String    @db.ObjectId
+  startDate  DateTime?
+  endDate   DateTime?
+  strain    String?
+  entries   Entry[]
+  grower    User      @relation(fields: [growerId], references: [id], onDelete: Cascade)
+  growerId  String
 }
 
 //temp model Entry
@@ -52,6 +55,7 @@ model Entry {
   vpd     String?
   dli     String?
   par     String?
+  co2     String?
   hoursOfLight  String?
   note    String
 }

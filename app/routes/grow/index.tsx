@@ -4,6 +4,7 @@ import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Outlet, Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server";
+import { getUser } from "~/utils/session.server";
 import { Grow } from "@prisma/client"
 // import stylesUrl from "../styles/grow.css";
 
@@ -16,20 +17,40 @@ export let links: LinksFunction = () =>{
     ]
 }
 
-type LoaderData = {grows: Array<Grow>}
-export const loader: LoaderFunction = async() => {
+type LoaderData = {
+    user: Awaited<ReturnType<typeof getUser>>;
+    grows: Array<Grow>
+}
+
+export const loader: LoaderFunction = async({request}) => {
+    const grows = await db.grow.findMany();
+    const user = await getUser(request);
+
     const data: LoaderData = {
-        grows: await db.grow.findMany(),
-      };
+        grows,
+        user,
+    };
 
     return json(data);
 }
 
 
 export default function GrowIndexRoute() {
-    let data = useLoaderData()
+    const data = useLoaderData<LoaderData>();
     return (
         <div>
+         {data.user ? (
+            <div className="user-info">
+              <span>{`Hi ${data.user.username}`}</span>
+              <form action="/logout" method="post">
+                <button type="submit" className="button">
+                  Logout
+                </button>
+              </form>
+            </div>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
             <h3>Grow</h3>
             <ul>
                 {data.grows.map(grow => (
@@ -37,6 +58,13 @@ export default function GrowIndexRoute() {
                         <Link to={grow.id}>
                             {grow.title}
                         </Link>
+                        {grow.strain}
+                        {grow.expectedDays} Day Grow
+                        X Days Left
+                        {grow.details}
+                        Started On: {grow.startDate}
+                        Ends On: {grow.endDate}
+
                     </li>
                 ))}
             </ul>

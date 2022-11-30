@@ -1,4 +1,5 @@
 import type { LinksFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 
 export default function Index() {
   return (
@@ -6,7 +7,7 @@ export default function Index() {
       <h1>Welcome to Growdash</h1>
       <div>Hero Image goes here</div>
       <div>
-        Login | Signup
+      <Link to="/login">Login</Link> | Signup
       </div>
     </div>
   );

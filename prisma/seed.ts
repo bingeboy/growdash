@@ -1,37 +1,34 @@
 import { PrismaClient } from "@prisma/client";
+const db = new PrismaClient();
 
-const prisma = new PrismaClient()
 
-async function main() {
-    // Connect to client
-    await prisma.$connect()
-    //.. write prisma client queries here
+async function seed() {
+  const kody = await db.user.create({
+    data: {
+      username: "kody",
+      email: "kody@whatever.com",
+      // this is a hashed version of "twixrox"
+      passwordHash:
+        "$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u",
+    },
+  });
 
-    await prisma.user.create({
-
-        data: {
-          name: 'Rich',
-          email: 'hello@prisma.com',
-          grows: {
-            create: {
-              title: 'My first grow',
-              body: 'Lots of really interesting stuff',
-              slug: 'my-first-post',
-            },
-          },
-        }
-      })
-
-    const allUsers = await prisma.user.findMany()
-    console.log(allUsers)
+  await Promise.all(
+     getGrows().map((grow) => {
+       const data = { growerId: kody.id, ...grow };
+       return db.grow.create({ data });
+    })
+  );      
 }
 
-main()
-    .then(async () => {
-        await prisma.$disconnect()
-    })
-    .catch(async (err) => {
-        console.error(err)
-        await prisma.$disconnect()
-        process.exit(1)
-    })
+function getGrows() {
+
+  return [
+    {
+      title: "title goes here",
+      description : "description goes here",
+      expectedDays: 60,
+      strain: "durban",
+  }
+] 
+}
