@@ -23,14 +23,18 @@ type LoaderData = {
 }
 
 export const loader: LoaderFunction = async({request}) => {
-    const grows = await db.grow.findMany();
     const user = await getUser(request);
+    const grows = await db.grow.findMany({
+        where: {
+            growerId: user.id
+          },
+    });
 
     const data: LoaderData = {
         grows,
         user,
     };
-
+    console.log(data, "===============================")
     return json(data);
 }
 

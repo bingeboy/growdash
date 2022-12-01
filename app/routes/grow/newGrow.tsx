@@ -45,6 +45,7 @@ export const action: ActionFunction = async({ request }) => {
     let startDate = new Date(form.get("startDate"));
     let endDate = new Date(form.get("endDate"));
     let strain = form.get("strain");
+    let expectedDays =  form.get("expectedDays");
 
     //startDate = startDate.toISOString()) || null;
     //check input
@@ -61,7 +62,7 @@ export const action: ActionFunction = async({ request }) => {
         description: validateGrowDescription(description),
     };
 
-    const fields = { title, description, startDate, endDate, strain }
+    const fields = { title, description, startDate, endDate, strain, expectedDays }
 
     if (Object.values(fieldErrors).some(Boolean)) {
       return badRequest({ fieldErrors, fields });
@@ -81,7 +82,7 @@ export default  function NewGrowRoute() {
                 <input type="text" name="title" />
             </label>
             <label>Expected Days
-                <input type="number" />
+                <input type="number" name="expectedDays" />
             </label>
             <label >Start Date
                 <input type="datetime-local"  name="startDate"/>

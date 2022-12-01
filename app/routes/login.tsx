@@ -5,6 +5,7 @@ import { useActionData, Link, useSearchParams } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 import {
     login,
+    register,
     createUserSession,
     } from "~/utils/session.server";
 
@@ -96,13 +97,14 @@ export const action: ActionFunction = async ({ request }) => {
             formError: `User with username ${username} already exists`,
           });
         }
-        // create the user
-        // create their session and redirect to /jokes
-        return badRequest({
-          fields,
-          formError: "Not implemented",
-        });
-        
+        const user = await register({ username, password});
+        if (!user) {
+          return badRequest({
+            fields,
+            formError: `Something went wrong trying to create a new user.`,
+          });
+        }
+        return createUserSession(user.id, redirectTo);
       }
       default: {
         return badRequest({

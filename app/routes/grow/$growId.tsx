@@ -22,11 +22,17 @@ export const loader: LoaderFunction = async({params}) => {
 
 export default function GrowRoute() {
     const data = useLoaderData<LoaderData>();
+    const grow = data.grow;
 
     return (
         <div>
-            <h3>{data.grow.title}</h3>
-            {data.grow.body}
+            <h3>{grow.title}</h3>
+            <p>Cultivar: {grow.strain}</p>
+            <p>Days: {grow.expectedDays}</p>
+            <p>Start Date: {grow.startDate}</p>
+            <p>End Date: {grow.endDate}</p>
+            <p>Descrption: {grow.description}</p>
+            <em>created {grow.createdAt}</em>
         </div>
     );
 }

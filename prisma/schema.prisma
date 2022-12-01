@@ -11,12 +11,12 @@ datasource db {
 }
 
 // User 
-// TODO Support cascade deletes for user accounts
+// TODO Make email field manditory on register route
 model User {
   id    String  @id @default(auto()) @map("_id") @db.ObjectId  
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  email String  @unique
+  email String?  @unique
   username  String @unique
   passwordHash String 
   grows Grow[]
