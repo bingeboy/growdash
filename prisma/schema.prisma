@@ -39,9 +39,9 @@ model Grow {
 
 //temp model Entry
 model Entry {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  grow    Grow   @relation(fields: [growId], references: [id])
-  growId  String @db.ObjectId
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
+  grow    Grow   @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  entryId  String 
   createdAt  DateTime @default(now())
   phRes   String?
   phSub   String?
@@ -57,5 +57,5 @@ model Entry {
   par     String?
   co2     String?
   hoursOfLight  String?
-  note    String
+  note    String?
 }

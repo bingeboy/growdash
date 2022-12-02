@@ -34,7 +34,6 @@ export const loader: LoaderFunction = async({request}) => {
         grows,
         user,
     };
-    console.log(data, "===============================")
     return json(data);
 }
 

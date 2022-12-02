@@ -13,7 +13,7 @@ import styles from "./styles/app.css"
 export function links() {
   return [
     { rel: "stylesheet", href: styles },
-    { rel: "stylesheet", href: "//rsms.me/inter/inter.css"}
+    // { rel: "stylesheet", href: "//rsms.me/inter/inter.css"}
   ]
 }
 

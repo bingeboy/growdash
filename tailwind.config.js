@@ -2,6 +2,14 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  content: ["./app/**/*.{html,ts,tsx}"],
+  darkMode: 'media',
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
@@ -12,5 +20,6 @@ module.exports = {
       },
     },
   },
+  
   plugins: [],
 }

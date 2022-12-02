@@ -77,28 +77,40 @@ export const action: ActionFunction = async({ request }) => {
 
 export default  function NewGrowRoute() {
     return (
-        <form method="post">
-            <label>Grow Name
-                <input type="text" name="title" />
-            </label>
-            <label>Expected Days
-                <input type="number" name="expectedDays" />
-            </label>
-            <label >Start Date
-                <input type="datetime-local"  name="startDate"/>
-            </label>
-            <label>End Date
-                <input type="datetime-local" name="endDate"/>
-            </label>
-            <label>Strain
-                <input type="text" name="strain" />
-            </label>
-            <label>Description of Grow
-                <input type="text" name="description" />
-            </label>
-            <button type="submit" className="button">
-                Submit
-            </button>
-        </form>
+        <div>
+         <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+             Track a new Grow
+         </h1>
+         <form method="post">
+            <div className="flex items-center justify-center bg-white p-8">
+                <div className="mx-auto w-full max-w-xs">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Grow Name</label>
+                            <div className="relative mt-1 rounded-md shadow-sm">
+                                <input type="text" name="title" placeholder="Enter Grow Name" className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                            </div>
+                    </div>
+                 </div>
+             <label>Expected Days
+                 <input type="number" name="expectedDays" />
+             </label>
+             <label >Start Date
+                 <input type="datetime-local"  name="startDate"/>
+             </label>
+             <label>End Date
+                 <input type="datetime-local" name="endDate"/>
+             </label>
+             <label>Strain
+                 <input type="text" name="strain" />
+             </label>
+             <label>Description of Grow
+                 <input type="text" name="description" />
+             </label>
+             <button type="submit" className="button">
+                 Submit
+             </button>
+             </div>
+         </form>
+        </div>
     );
 }
