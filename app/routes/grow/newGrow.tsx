@@ -45,7 +45,7 @@ export const action: ActionFunction = async({ request }) => {
     let startDate = new Date(form.get("startDate"));
     let endDate = new Date(form.get("endDate"));
     let strain = form.get("strain");
-    let expectedDays =  form.get("expectedDays");
+    let expectedDays =  parseInt(form.get("expectedDays"));
 
     //startDate = startDate.toISOString()) || null;
     //check input

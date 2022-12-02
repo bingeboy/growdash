@@ -39,10 +39,10 @@ export async function login({username, password} : loginForm) {
 }
 
 //TODO add email support to this function 
-export async function register({username, password}: registerForm) {
+export async function register({username, password, email}: registerForm) {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await db.user.create({
-        data: {username, passwordHash, email:"fart@fart.com"}
+        data: {username, passwordHash, email}
     });
     return {
         id:user.id,

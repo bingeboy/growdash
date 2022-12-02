@@ -22,6 +22,13 @@ function validatePassword(password: unknown) {
     }
 }
 
+//TODO Add email check here
+function validateEmail(email: unknown) {
+  if (typeof email !== "string" || email.length < 4) {
+      return `Email isn't valid`;
+  }
+}
+
 function validateUrl(url: any) {
     console.log(url);
     let urls = ["/grow", "/",];  //TODO add domain here once there is a domain
@@ -32,15 +39,17 @@ function validateUrl(url: any) {
 }
  
 type ActionData = {
-formError?: string;
-fieldErrors?: {
+  formError?: string;
+  fieldErrors?: {
     username: string | undefined;
     password: string | undefined;
-};
-fields?: {
+    email: string | undefined;
+  };
+  fields?: {
     loginType: string;
-    username: string;
-    password: string;
+      username: string;
+      password: string;
+      email: string;
     };
 };
 
@@ -51,6 +60,8 @@ export const action: ActionFunction = async ({ request }) => {
     const loginType = form.get("loginType");
     const username = form.get("username");
     const password = form.get("password");
+    const email = form.get("email");
+
     const redirectTo = validateUrl(
       form.get("redirectTo") || "/grows"
     );
@@ -66,6 +77,7 @@ export const action: ActionFunction = async ({ request }) => {
     }
   
     const fields = { loginType, username, password };
+    
     const fieldErrors = {
       username: validateUsername(username),
       password: validatePassword(password),
@@ -97,7 +109,16 @@ export const action: ActionFunction = async ({ request }) => {
             formError: `User with username ${username} already exists`,
           });
         }
-        const user = await register({ username, password});
+        const emailExists =  await db.user.findFirst({
+          where: { email },
+        });
+        if (emailExists) {
+          return badRequest({
+            fields,
+            formError: `User with email ${email} already exists`,
+          });
+        }
+        const user = await register({ username, password, email});
         if (!user) {
           return badRequest({
             fields,
@@ -206,6 +227,38 @@ export default function Login() {
                 </p>
               ) : null}
             </div>
+
+            {/* ////////////////////////////////////////////// email input */}
+            <div>
+              <label htmlFor="email-input">email</label>
+              <input
+                id="email-input"
+                name="email"
+                defaultValue={actionData?.fields?.email}
+                type="email"
+                aria-invalid={
+                  Boolean(
+                    actionData?.fieldErrors?.email
+                  ) || undefined
+                }
+                aria-errormessage={
+                  actionData?.fieldErrors?.email
+                    ? "password-error"
+                    : undefined
+                }
+              />
+              {actionData?.fieldErrors?.email ? (
+                <p
+                  className="form-validation-error"
+                  role="alert"
+                  id="password-error"
+                >
+                  {actionData.fieldErrors.email}
+                </p>
+              ) : null}
+            </div>
+
+            {/* //////////////////////////////////// form error */}
             <div id="form-error-message">
               {actionData?.formError ? (
                 <p
