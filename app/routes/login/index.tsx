@@ -99,34 +99,7 @@ export const action: ActionFunction = async ({ request }) => {
  
         return createUserSession(user.id, redirectTo);
       }
-      case "register": {
-        const userExists = await db.user.findFirst({
-          where: { username },
-        });
-        if (userExists) {
-          return badRequest({
-            fields,
-            formError: `User with username ${username} already exists`,
-          });
-        }
-        const emailExists =  await db.user.findFirst({
-          where: { email },
-        });
-        if (emailExists) {
-          return badRequest({
-            fields,
-            formError: `User with email ${email} already exists`,
-          });
-        }
-        const user = await register({ username, password, email});
-        if (!user) {
-          return badRequest({
-            fields,
-            formError: `Something went wrong trying to create a new user.`,
-          });
-        }
-        return createUserSession(user.id, redirectTo);
-      }
+
       default: {
         return badRequest({
           fields,
@@ -152,34 +125,7 @@ export default function Login() {
                 searchParams.get("redirectTo") ?? undefined
               }
             />
-            <fieldset>
-              <legend className="sr-only">
-                Login or Register?
-              </legend>
-              <label>
-                <input
-                  type="radio"
-                  name="loginType"
-                  value="login"
-                  defaultChecked={
-                    !actionData?.fields?.loginType ||
-                    actionData?.fields?.loginType === "login"
-                  }
-                />{" "}
-                Login
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="loginType"
-                  value="register"
-                  defaultChecked={
-                    actionData?.fields?.loginType === "register"
-                  }
-                />{" "}
-                Register
-              </label>
-            </fieldset>
+
             <div>
               <label htmlFor="username-input">Username</label>
               <input type="text" id="username-input" name="username"
@@ -228,35 +174,6 @@ export default function Login() {
               ) : null}
             </div>
 
-            {/* ////////////////////////////////////////////// email input */}
-            <div>
-              <label htmlFor="email-input">email</label>
-              <input
-                id="email-input"
-                name="email"
-                defaultValue={actionData?.fields?.email}
-                type="email"
-                aria-invalid={
-                  Boolean(
-                    actionData?.fieldErrors?.email
-                  ) || undefined
-                }
-                aria-errormessage={
-                  actionData?.fieldErrors?.email
-                    ? "password-error"
-                    : undefined
-                }
-              />
-              {actionData?.fieldErrors?.email ? (
-                <p
-                  className="form-validation-error"
-                  role="alert"
-                  id="password-error"
-                >
-                  {actionData.fieldErrors.email}
-                </p>
-              ) : null}
-            </div>
 
             {/* //////////////////////////////////// form error */}
             <div id="form-error-message">

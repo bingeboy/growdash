@@ -20,7 +20,7 @@ export const loader: LoaderFunction = async({params}) => {
  const entries = await db.entry.findMany({
     where: { entryId: grow.id}
  });
-
+//TODO Add a check here to verify the grow.id matches the user.id to avoid seeing grows not by logged in user
 
  const data: LoaderData = { grow, entry: entries };
 

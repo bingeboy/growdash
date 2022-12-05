@@ -64,12 +64,20 @@ export default function GrowEntryRoute() {
                     TODO Leaf Surface Temp 
                          Substrate Moisture: NOT IMPLEMENTED IN MODEL
 
-                            Humidity: {entry.humidity}
-                            VPD: {entry.vpd}
-                            DLI: {entry.dli}
-                            Par: {entry.par}
-                            CO2: {entry.co2}
-                            Daylight Hrs: {entry.hoursOfLight}
+                    <label>Humidity</label>
+                    <input type="text" value="humidity" />
+                    <label>VPD</label>
+                    <input type="text" value="vpd" />
+                    <label>DLI</label>
+                    <input type="text" value="dli" />
+                    <label>Par</label>
+                    <input type="text" value="par" />
+
+                    <label>Co2</label>
+                    <input type="" value="co2" placeholder="Enter PMM" />
+
+                    <label>Daylight Hours</label>
+                    <input type="" value="hoursOfLight" placeholder="Hours of light the plants are currently getting" />
 
                     <label>Note</label>
                     <textarea value="note" className=""></textarea>

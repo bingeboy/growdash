@@ -44,7 +44,7 @@ export default function GrowIndexRoute() {
         <div>
          {data.user ? (
             <div className="user-info">
-              <span>{`Hi ${data.user.username}`}</span>
+              <span>{`Logged in as ${data.user.username}`}</span>
               <form action="/logout" method="post">
                 <button type="submit" className="button">
                   Logout
