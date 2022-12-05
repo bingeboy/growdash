@@ -3,9 +3,8 @@ import { Link } from "@remix-run/react";
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+    <div>
       <nav className="bg-gray-800">
-        <div>GrowDash Logo Here</div>
         <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-end">
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">

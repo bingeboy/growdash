@@ -31,10 +31,13 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
+      <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+        <div>GrowDash Logo Here</div>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        </div>
       </body>
     </html>
   );

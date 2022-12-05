@@ -1,7 +1,7 @@
 //New Grow Route
 import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
+import { Outlet, useActionData } from "@remix-run/react";
 
 import { db } from "~/utils/db.server";
 import { requireUserId } from "~/utils/session.server";
@@ -78,6 +78,7 @@ export const action: ActionFunction = async({ request }) => {
 export default  function NewGrowRoute() {
     return (
         <div>
+            <Outlet />
          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
              Track a new Grow
          </h1>
@@ -91,22 +92,47 @@ export default  function NewGrowRoute() {
                             </div>
                     </div>
                  </div>
-             <label>Expected Days
-                 <input type="number" name="expectedDays" />
-             </label>
-             <label >Start Date
-                 <input type="datetime-local"  name="startDate"/>
-             </label>
-             <label>End Date
-                 <input type="datetime-local" name="endDate"/>
-             </label>
-             <label>Strain
-                 <input type="text" name="strain" />
-             </label>
-             <label>Description of Grow
-                 <input type="text" name="description" />
-             </label>
-             <button type="submit" className="button">
+                 <div className="mx-auto w-full max-w-xs">
+                    <div>
+                        <label  className="block text-sm font-medium text-gray-700">Expected Days</label>
+                        <div className="relative mt-1 rounded-md shadow-sm">
+                            <input type="number" name="expectedDays"  className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                        </div>
+                    </div>
+                </div>
+                <div className="mx-auto w-full max-w-xs">
+                    <div>   
+                        <label  className="block text-sm font-medium text-gray-700">Start Date</label>
+                        <div className="relative mt-1 rounded-md shadow-sm">
+                            <input type="datetime-local"  name="startDate"  className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                        </div>
+                    </div>
+                 </div>
+                 <div className="mx-auto w-full max-w-xs">
+                    <div>            
+                        <label  className="block text-sm font-medium text-gray-700">End Date</label>
+                        <div className="relative mt-1 rounded-md shadow-sm">
+                            <input type="datetime-local" name="endDate"  className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                         </div>
+                    </div>
+                 </div>
+                 <div className="mx-auto w-full max-w-xs">
+                    <div>            
+                        <label className="block text-sm font-medium text-gray-700">Cultivar (strain)</label>
+                        <div className="relative mt-1 rounded-md shadow-sm">
+                            <input type="text" name="strain"  placeholder="Cultivar Name" className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                        </div>
+                    </div>
+                 </div>
+                 <div className="mx-auto w-full max-w-xs">
+                    <div>             
+                        <label className="block text-sm font-medium text-gray-700">Description of Grow</label>
+                        <div className="relative mt-1 rounded-md shadow-sm">
+                            <textarea placeholder="Add a description" name="description" className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  />
+                        </div>
+                    </div>
+                 </div>
+             <button type="submit" className="text-xs leading-5 font-semibold bg-slate-400/10 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:highlight-white/5">
                  Submit
              </button>
              </div>

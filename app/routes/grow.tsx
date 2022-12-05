@@ -8,14 +8,14 @@ import { getUser } from "~/utils/session.server";
 import { Grow } from "@prisma/client"
 // import stylesUrl from "../styles/grow.css";
 
-export let links: LinksFunction = () =>{
-    return [
-        {
-            rel: "stylesheet",
-            href: "stylesUrl"
-        }
-    ]
-}
+// export let links: LinksFunction = () =>{
+//     return [
+//         {
+//             rel: "stylesheet",
+//             href: "stylesUrl"
+//         }
+//     ]
+// }
 
 type LoaderData = {
     user: Awaited<ReturnType<typeof getUser>>;
@@ -64,13 +64,14 @@ export default function GrowIndexRoute() {
                         {grow.strain}
                         {grow.expectedDays} Day Grow
                         X Days Left
-                        {grow.details}
+                        <p>{grow.description}</p>
                         Started On: {grow.startDate}
                         Ends On: {grow.endDate}
 
                     </li>
                 ))}
             </ul>
+            <Outlet />
         </div>
     );
     
