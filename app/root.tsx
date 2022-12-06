@@ -63,11 +63,11 @@ export default function App() {
               {data.user ? (
                    <div className="user-info">
                      <span>{`Logged in as ${data.user.username}`}</span>
-                     {/* <form action="/logout" method="post">
+                     <form action="/logout" method="post">
                        <button type="submit" className="button">
                          Logout
                        </button>
-                     </form> */}
+                     </form>
                    </div>
                 ) : (
                   <div className="user-info">

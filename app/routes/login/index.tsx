@@ -1,11 +1,9 @@
 import type { ActionFunction, LinksFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useActionData, Link, useSearchParams } from "@remix-run/react";
+import { useActionData, Link, useSearchParams, Form } from "@remix-run/react";
 
-import { db } from "~/utils/db.server";
 import {
     login,
-    register,
     createUserSession,
     } from "~/utils/session.server";
 
@@ -22,13 +20,6 @@ function validatePassword(password: unknown) {
     }
 }
 
-//TODO Add email check here
-function validateEmail(email: unknown) {
-  if (typeof email !== "string" || email.length < 4) {
-      return `Email isn't valid`;
-  }
-}
-
 function validateUrl(url: any) {
     console.log(url);
     let urls = ["/grow", "/",];  //TODO add domain here once there is a domain
@@ -43,13 +34,11 @@ type ActionData = {
   fieldErrors?: {
     username: string | undefined;
     password: string | undefined;
-    email: string | undefined;
   };
   fields?: {
     loginType: string;
       username: string;
       password: string;
-      email: string;
     };
 };
 
@@ -57,16 +46,13 @@ const badRequest = (data: ActionData) => json(data, { status: 400 });
 
 export const action: ActionFunction = async ({ request }) => {
     const form = await request.formData();
-    const loginType = form.get("loginType");
     const username = form.get("username");
     const password = form.get("password");
-    const email = form.get("email");
 
     const redirectTo = validateUrl(
-      form.get("redirectTo") || "/grows"
+      form.get("redirectTo") || "/grow"
     );
     if (
-      typeof loginType !== "string" ||
       typeof username !== "string" ||
       typeof password !== "string" ||
       typeof redirectTo !== "string"
@@ -76,20 +62,19 @@ export const action: ActionFunction = async ({ request }) => {
       });
     }
   
-    const fields = { loginType, username, password };
+    const fields = { username, password };
     
     const fieldErrors = {
       username: validateUsername(username),
       password: validatePassword(password),
     };
+
     if (Object.values(fieldErrors).some(Boolean))
       return badRequest({ fieldErrors, fields });
   
-    switch (loginType) {
-      case "login": {
         // login to get the user
         const user = await login({ username, password });
-        console.log({ user } , "============================================================================");
+
         if (!user) {
           return badRequest({
             fields,
@@ -97,16 +82,7 @@ export const action: ActionFunction = async ({ request }) => {
           });
         }
  
-        return createUserSession(user.id, redirectTo);
-      }
-
-      default: {
-        return badRequest({
-          fields,
-          formError: `Login type invalid`,
-        });
-      }
-    }
+      return createUserSession(user.id, redirectTo);
   };
 
 //login
@@ -117,7 +93,7 @@ export default function Login() {
       <div className="container">
         <div className="content" data-light="">
           <h1>Login</h1>
-          <form method="post">
+          <Form method="post">
             <input
               type="hidden"
               name="redirectTo"
@@ -189,7 +165,7 @@ export default function Login() {
             <button type="submit" className="button">
               Submit
             </button>
-          </form>
+          </Form>
         </div>
         <div className="links">
           <ul>

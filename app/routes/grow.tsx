@@ -42,18 +42,7 @@ export default function GrowIndexRoute() {
     const data = useLoaderData<LoaderData>();
     return (
         <div>
-         {data.user ? (
-            <div className="user-info">
-              <span>{`Logged in as ${data.user.username}`}</span>
-              <form action="/logout" method="post">
-                <button type="submit" className="button">
-                  Logout
-                </button>
-              </form>
-            </div>
-          ) : (
-            <Link to="/login">Login</Link>
-          )}
+
             <h3>Grow</h3>
             <ul>
                 {data.grows.map(grow => (
