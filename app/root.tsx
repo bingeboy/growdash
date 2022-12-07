@@ -15,7 +15,6 @@ import styles from "./styles/app.css"
 export function links() {
   return [
     { rel: "stylesheet", href: styles },
-    // { rel: "stylesheet", href: "//rsms.me/inter/inter.css"}
   ]
 }
 
@@ -54,8 +53,9 @@ export default function App() {
       </head>
       <body className="h-full">
       <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-        <div>GrowDash Logo Here</div>
+        
         <nav className="bg-gray-800">
+          <div>GrowDash Logo Here</div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-end">
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
