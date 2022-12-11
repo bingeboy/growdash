@@ -35,7 +35,10 @@ export default function GrowRoute() {
 
     return (
         <div>
+            =========== start of growId template
+            <Link to="./newEntry">Add daily entry</Link>
             <h3>{grow.title}</h3>
+            
             <p>Cultivar: {grow.strain}</p>
             <p>Days: {grow.expectedDays}</p>
             <p>Start Date: {grow.startDate}</p>

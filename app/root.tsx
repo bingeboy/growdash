@@ -55,16 +55,16 @@ export default function App() {
       <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
         
         <nav className="bg-gray-800">
-          <div>GrowDash Logo Here</div>
+          <div className="bg-logo-white bg-cover w-48 h-10  p-2"></div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-end">
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
               
               {data.user ? (
-                   <div className="user-info">
-                     <span>{`Logged in as ${data.user.username}`}</span>
+                   <div className="user-info flex">
+                     <span className=" text-white px-3 py-2 text-sm font-medium ">{`Logged in as ${data.user.username}`}</span>
                      <form action="/logout" method="post">
-                       <button type="submit" className="button">
+                       <button type="submit" className="button" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
                          Logout
                        </button>
                      </form>
@@ -84,6 +84,25 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <footer className="content-center">
+          <ul className="flex">
+            <li>
+              Copyright &copy; 2022
+            </li>
+            <li>
+              Privacy Policy
+            </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/grow">Grow</Link>
+            </li>
+            <li>
+              whatever footer links  here
+            </li>
+          </ul>
+        </footer>
         </div>
       </body>
     </html>

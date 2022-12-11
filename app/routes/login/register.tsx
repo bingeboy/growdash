@@ -127,9 +127,13 @@ export default function Login() {
     const actionData = useActionData<ActionData>();
     const [searchParams] = useSearchParams();
     return (
-      <div className="container">
+      <div className="container relative mx-auto mt-16 grid w-full max-w-container grid-cols-1 px-4 xl:mt-4">
         <div className="content" data-light="">
-          <h1>Register</h1>
+          <h1 className="mt-4 text-3xl font-extrabold tracking-[-0.04em] text-black sm:text-5xl sm:leading-[3.5rem]">Register</h1>
+          <p className="mt-4 text-base leading-7 text-slate-600">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+            et dolore magna aliqua. Felis eget velit aliquet sagittis.
+          </p>
           <form method="post">
             <input
               type="hidden"
@@ -230,21 +234,10 @@ export default function Login() {
                 </p>
               ) : null}
             </div>
-            <button type="submit" className="button">
+            <button type="submit" className="button bg-sky-500 hover:bg-sky-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">
               Submit
             </button>
           </form>
-        </div>
-
-        <div className="links">
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/grow">Grow</Link>
-            </li>
-          </ul>
         </div>
       </div>
     );
