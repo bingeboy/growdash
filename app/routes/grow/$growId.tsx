@@ -2,7 +2,7 @@
 
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Link, useLoaderData} from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import type { Grow, Entry } from "@prisma/client";
 
 import { db } from "~/utils/db.server";
@@ -37,9 +37,9 @@ export default function GrowRoute() {
         <div>
             =========== start of growId template
             <Link to="./newEntry">Add daily entry</Link>
-            <h3>{grow.title}</h3>
+            <h3  className="text-lg">{grow.title}</h3>
             
-            <p>Cultivar: {grow.strain}</p>
+            <p><strong>Cultivar</strong>: {grow.strain}</p>
             <p>Days: {grow.expectedDays}</p>
             <p>Start Date: {grow.startDate}</p>
             <p>End Date: {grow.endDate}</p>

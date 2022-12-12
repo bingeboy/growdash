@@ -22,7 +22,7 @@ export async function login({username, password} : loginForm) {
     const user = await db.user.findUnique({
         where: { username }
     })
-    console.log(user, '--------------------------------------')
+
     if(!user) return null;
 
     //check user password
@@ -37,8 +37,7 @@ export async function login({username, password} : loginForm) {
         username
     };
 }
-
-//TODO add email support to this function 
+ 
 export async function register({username, password, email}: registerForm) {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await db.user.create({

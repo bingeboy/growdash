@@ -23,7 +23,7 @@ export default function GrowEntryRoute() {
 
     return (
         <div>
-            <h3>Create New Entry</h3>
+            <h3>Create Entry</h3>
             {/* TODO make entry form here */}
 
 
@@ -35,10 +35,10 @@ export default function GrowEntryRoute() {
                             <input type="number"value="phRes" />
 
                             <label>pH Substrate</label>
-                            <input type="" value="phSub" className="" />
+                            <input type="" value="phSub" className="fpp" />
 
                             <label>ph Runoff</label>
-                            <input type="" value="phRun" className="" />
+                            <input type="" value="phRun" className="foo" />
 
                     EC Values:
                     <label>EC Res</label>
@@ -80,7 +80,7 @@ export default function GrowEntryRoute() {
                     <input type="" value="hoursOfLight" placeholder="Hours of light the plants are currently getting" />
 
                     <label>Note</label>
-                    <textarea value="note" className=""></textarea>
+                    <textarea value="note" className="foo"></textarea>
 
         </div>
     );
