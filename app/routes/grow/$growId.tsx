@@ -31,7 +31,6 @@ export default function GrowRoute() {
     const data = useLoaderData<LoaderData>();
     const grow = data.grow;
     const entries = data.entry;
-    console.log('entry: ', entries )
 
     return (
         <div>

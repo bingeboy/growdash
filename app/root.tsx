@@ -64,7 +64,7 @@ export default function App() {
                    <div className="user-info flex">
                      <span className=" text-white px-3 py-2 text-sm font-medium ">{`Logged in as ${data.user.username}`}</span>
                      <form action="/logout" method="post">
-                       <button type="submit" className="button" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
+                       <button type="submit"  className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
                          Logout
                        </button>
                      </form>

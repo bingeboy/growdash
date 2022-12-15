@@ -9,13 +9,13 @@ import { requireUserId } from "~/utils/session.server";
 
 
 export function validateGrowName(title: string) {
-    if(title < 3) {
+    if(title.length < 3) {
         return "Grow Title must be at least 3 characters long";
     }
 }
 
 export function validateGrowDescription(description: string) {
-    if(description < 3) {
+    if(description.length < 3) {
         return "Grow Title must be at least 3 characters long";
     }
 }
@@ -29,6 +29,7 @@ type ActionData = {
     fields?: {
       name: string;
       content: string;
+      expectedDays: number;
     };
   };
   

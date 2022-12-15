@@ -1,11 +1,10 @@
 import type { ActionFunction, LinksFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useActionData, Link, useSearchParams, Form } from "@remix-run/react";
+import { useActionData, useSearchParams, Form } from "@remix-run/react";
 
 import {
     login,
     createUserSession,
-    getUser,
     } from "~/utils/session.server";
 
 //validation
