@@ -76,7 +76,7 @@ export const action: ActionFunction = async({ request, params }) => {
         data: { ...fields, entryId: params.growId }, // params.growId is really all thats needed
       });
 
-      return redirect(`/grow/`);
+      return redirect(`/grow/${params.growId}`);
 }
 
 
@@ -93,24 +93,24 @@ export default function GrowEntryRoute() {
                     ph Values:
 
                             <label>Res Ph</label>
-                            <input type="number" name="phRes" step="0.1"/>
+                            <input type="number" name="phRes" step="0.1" max="14" min="1" defaultValue={6}/>
 
                             <label>pH Substrate</label>
-                            <input type="number" name="phSub" className="fpp" />
+                            <input type="number" name="phSub" step="0.1" className="fpp"  max="14" min="1" />
 
                             <label>ph Runoff</label>
-                            <input type="number" name="phRun" className="foo" />
+                            <input type="number" name="phRun" step="0.1" className="foo"  max="14" min="1"  />
 
                     EC Values:
 
                     <label>EC Res</label>
-                    <input type="number" name="ecRes" placeholder="EC Value"/>
+                    <input type="number" name="ecRes" placeholder="EC Value" step="0.1" max="30" min="0.1" />
 
                     <label htmlFor="EC Subtrate">EC Substrate</label> 
-                    <input type="number" name="ecSub" placeholder="EC Value"/>
+                    <input type="number" name="ecSub" placeholder="EC Value" step="0.1"  max="30" min="0.1" />
 
                     <label>EC Runoff</label> 
-                    <input type="number" name="ecRun" placeholder="EC Value"/>       
+                    <input type="number" name="ecRun" placeholder="EC Value" step="0.1"  max="30" min="0.1" />       
 
                     Temperature:
 
@@ -124,11 +124,14 @@ export default function GrowEntryRoute() {
                     <input type="number" name="substrateTemp" placeholder=" "/>
 
                     <label>Humidity</label>
-                    <input type="number" name="humidity" />
-                    <label>VPD</label>
+                    <input type="number" name="humidity" max="99" min="30"/>
+
+                    <label>VPD (vapor pressure of air = saturation vapor pressure of air * relative humidity)</label>
                     <input type="text" name="vpd" />
+
                     <label>DLI</label>
                     <input type="text" name="dli" />
+
                     <label>Par</label>
                     <input type="text" name="par" />
 
@@ -136,10 +139,10 @@ export default function GrowEntryRoute() {
                     <input type="number" name="co2" placeholder="Enter PMM" />
 
                     <label>Daylight Hours</label>
-                    <input type="number" name="hoursOfLight" placeholder="Hours of light the plants are currently getting" />
+                    <input type="number" name="hoursOfLight" placeholder="Hours of light the plants are currently getting" max="24" defaultValue={12}/>
 
                     <label>Note</label>
-                    <textarea name="note" className="foo"></textarea>
+                    <textarea name="note" className="foo" placeholder="Enter your daily notes here"></textarea>
                     <button type="submit" className="text-xs leading-5 font-semibold bg-slate-400/10 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:highlight-white/5">
                         Submit
                     </button>
